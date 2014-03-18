@@ -13,33 +13,44 @@ Ilat=100
 Ilon=100
 
 FL=$maindir"/MAU*"
-echo $FL
+#echo $FL
 
 # for each file
-#for cf in $FL
-#do
+for cf in $FL
+do
+
+#cf=$maindir"/MAURER12K_Forcing.1992-12.nc"
+echo $cf
 
 # Need to output time in a correct way
-ncdump -v var1,var2 foo.nc | sed -e '1,/data:/d' -e '$d' 
+# ncdump -v var1,var2 foo.nc | sed -e '1,/data:/d' -e '$d' 
 # check to remove black space
 
-	ncdump -t -v time $FL > $tempdir"time"
-	ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v ppt $FL > $tempdir"ppt"
-	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v temp $FL > $tempdir"temp"
-	ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v q $FL > $tempdir"q"
-	ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v press $FL > $tempdir"press"
-	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v sw $FL > $tempdir"sw"
-	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v lw $FL > $tempdir"lw"
-	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v wnd $FL > $tempdir"wnd"
+	ncdump -t -v time $cf | sed -e '1,/data:/d' -e '$d' > $tempdir"temp1"
+	sed 's/time = //g' $tempdir"temp1" > $tempdir"temp2"
+	sed 's/"//g'       $tempdir"temp2" > $tempdir"temp3"
+	sed 's$, $\n$g'    $tempdir"temp3" > $tempdir"temp4" 
+	sed '/^$/d'        $tempdir"temp4" > $tempdir"temp5" 	
+	sed 's/    //g'    $tempdir"temp5" > $tempdir"temp6"
+	sed 's/;//g'       $tempdir"temp6" > $tempdir"time"
+
+	
+	ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v ppt $cf > $tempdir"ppt"
+	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v temp $cf > $tempdir"temp"
+	ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v q $cf > $tempdir"q"
+	ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v press $cf > $tempdir"press"
+	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v sw $cf > $tempdir"sw"
+	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v lw $cf > $tempdir"lw"
+	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v wnd $cf > $tempdir"wnd"
 
 	cat $tempdir"time" >> $outpdir"time"
-	cat $tempdir"ppt" >> $outpdir"ppt"
-	cat $tempdir"temp" >> $outpdir"temp"
-	cat $tempdir"q" >> $outpdir"q"
-	cat $tempdir"press" >> $outpdir"press"
-	cat $tempdir"sw" >> $outpdir"sw"
-	cat $tempdir"lw" >> $outpdir"lw"
-	cat $tempdir"wnd" >> $outpdir"wnd"
-#done
+	head -n -1 $tempdir"ppt" >> $outpdir"ppt"
+	head -n -1 $tempdir"temp" >> $outpdir"temp"
+	head -n -1 $tempdir"q" >> $outpdir"q"
+	head -n -1 $tempdir"press" >> $outpdir"press"
+	head -n -1 $tempdir"sw" >> $outpdir"sw"
+	head -n -1 $tempdir"lw" >> $outpdir"lw"
+	head -n -1 $tempdir"wnd" >> $outpdir"wnd"
+done
 
 
