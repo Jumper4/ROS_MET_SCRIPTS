@@ -9,15 +9,15 @@ outpdir="/d1/wayandn/Grid_data/CSSL_pt/"
 rm -f $outpdir"*"
 
 # lat lon we want
-t_lat = 39.313237
-t_lon = -120.394202
+#t_lat = 39.313237
+#t_lon = -120.394202
 
 # Find indices of t_lat and t_lon
-
+# use other function
 
 #Lat lon indices (zero based)
-Ilat=100
-Ilon=100
+Ilat=113
+Ilon=34
 
 FL=$maindir"/MAU*"
 #echo $FL
@@ -42,22 +42,22 @@ echo $cf
 	sed 's/;//g'       $tempdir"temp6" > $tempdir"time"
 
 	
-	#ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v ppt $cf > $tempdir"ppt"
-	#ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v temp $cf > $tempdir"temp"
-	#ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v q $cf > $tempdir"q"
-	#ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v press $cf > $tempdir"press"
-	#ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v sw $cf > $tempdir"sw"
-	#ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v lw $cf > $tempdir"lw"
-	#ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v wnd $cf > $tempdir"wnd"
+	ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v ppt $cf > $tempdir"ppt"
+	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v temp $cf > $tempdir"temp"
+	ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v q $cf > $tempdir"q"
+	ncks -s '%13.9f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v press $cf > $tempdir"press"
+	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v sw $cf > $tempdir"sw"
+	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v lw $cf > $tempdir"lw"
+	ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v wnd $cf > $tempdir"wnd"
 
 	cat $tempdir"time" >> $outpdir"time"
-	#head -n -1 $tempdir"ppt" >> $outpdir"ppt"
-	#head -n -1 $tempdir"temp" >> $outpdir"temp"
-	#head -n -1 $tempdir"q" >> $outpdir"q"
-	#head -n -1 $tempdir"press" >> $outpdir"press"
-	#head -n -1 $tempdir"sw" >> $outpdir"sw"
-	#head -n -1 $tempdir"lw" >> $outpdir"lw"
-	#head -n -1 $tempdir"wnd" >> $outpdir"wnd"
+	head -n -1 $tempdir"ppt" >> $outpdir"ppt"
+	head -n -1 $tempdir"temp" >> $outpdir"temp"
+	head -n -1 $tempdir"q" >> $outpdir"q"
+	head -n -1 $tempdir"press" >> $outpdir"press"
+	head -n -1 $tempdir"sw" >> $outpdir"sw"
+	head -n -1 $tempdir"lw" >> $outpdir"lw"
+	head -n -1 $tempdir"wnd" >> $outpdir"wnd"
 done
 
 
