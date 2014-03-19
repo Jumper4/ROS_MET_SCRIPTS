@@ -23,7 +23,7 @@ lonvar = ncfile.variables['lon']
 newlat = latvar * np.ones((len(lonvar),len(latvar)))
 newlon = lonvar * np.ones((len(latvar),len(lonvar)))
 newlat = newlat.T
-newlon = (newlon - 180) * -1
+newlon = (360 - newlon) * -1
 iy,ix = naive_fast(newlat,newlon, t_lat, t_lon)
 print 'Closest lat lon:', newlat[iy,ix], newlon[iy,ix]
 print 'index values for lat and lon are:', iy, ix
