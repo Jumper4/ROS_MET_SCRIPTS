@@ -9,11 +9,11 @@ outpdir="/d1/wayandn/Grid_data/CSSL_pt/"
 rm -f $outpdir"*"
 
 # lat lon we want
-#t_lat = 39.313237
-#t_lon = -120.394202
+t_lat = 39.313237
+t_lon = -120.394202
 
 # Find indices of t_lat and t_lon
-# use other function
+# use other function:x
 
 #Lat lon indices (zero based)
 Ilat=113
