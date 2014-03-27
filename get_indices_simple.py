@@ -1,11 +1,14 @@
 import numpy as np
 import netCDF4
 
-#filelistin  = open('/d1/wayandn/Grid_data/Basin_pts/Hig/Lat_Lon_high_Basin.txt','r')
-#filelistout = open('/d1/wayandn/Grid_data/Basin_pts/Hig/Lat_Lon_high_Basin_Index.txt','w')
+filelistin  = open('/d1/wayandn/Grid_data/Basin_pts/Mid/Lat_Lon_Mid_Basin.txt','r')
+filelistout = open('/d1/wayandn/Grid_data/Basin_pts/Mid/Mid.txt','w')
 
-filelistin  = open('/d1/wayandn/Grid_data/Basin_pts/Low/Lat_Lon_Low_Basin.txt','r')
-filelistout = open('/d1/wayandn/Grid_data/Basin_pts/Low/Low.txt','w')
+#filelistin  = open('/d1/wayandn/Grid_data/Basin_pts/Hig/Lat_Lon_high_Basin.txt','r')
+#filelistout = open('/d1/wayandn/Grid_data/Basin_pts/Hig/Hig.txt','w')
+
+#filelistin  = open('/d1/wayandn/Grid_data/Basin_pts/Low/Lat_Lon_Low_Basin.txt','r')
+#filelistout = open('/d1/wayandn/Grid_data/Basin_pts/Low/Low.txt','w')
 
 
 
