@@ -1,11 +1,13 @@
 import numpy as np
 import netCDF4
 
-#t_lat = 39.313237
-#t_lon = -120.394202
+#filelistin  = open('/d1/wayandn/Grid_data/Basin_pts/Hig/Lat_Lon_high_Basin.txt','r')
+#filelistout = open('/d1/wayandn/Grid_data/Basin_pts/Hig/Lat_Lon_high_Basin_Index.txt','w')
 
-filelistin  = open('/d1/wayandn/Grid_data/Basin_pts/Lat_Lon_Low_Basin.txt','r')
-filelistout = open('/d1/wayandn/Grid_data/Basin_pts/Lat_Lon_Low_Basin_Index.txt','w')
+filelistin  = open('/d1/wayandn/Grid_data/Basin_pts/Low/Lat_Lon_Low_Basin.txt','r')
+filelistout = open('/d1/wayandn/Grid_data/Basin_pts/Low/Low.txt','w')
+
+
 
 #print 'We want lat an lon values:',t_lat,t_lon
 
@@ -28,16 +30,19 @@ newlon = lonvar * np.ones((len(latvar),len(lonvar)))
 newlat = newlat.T
 newlon = (360 - newlon) * -1
 
+count = 1
 for cl in filelistin:
 	#print cl
 	t_lon, t_lat = cl.split(',')
 	#print t_lon, t_lat
 	iy,ix = naive_fast(newlat,newlon, float(t_lat), float(t_lon))
 	#print iy, ix
-	filelistout.write("%s %s\n" % (iy, ix))	
+	filelistout.write("%s %s %s %s %s %s %s\n" % (count, iy, ix, newlat[iy,ix], newlon[iy,ix], float(t_lat), float(t_lon)))
+	count = count + 1	
 
 filelistout.close()
 filelistin.close()
 #print 'Closest lat lon:', newlat[iy,ix], newlon[iy,ix]
 #print 'index values for lat and lon are:', iy, ix
 ncfile.close()
+
