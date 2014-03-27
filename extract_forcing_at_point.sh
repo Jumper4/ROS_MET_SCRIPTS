@@ -4,27 +4,27 @@
 
 maindir="/d1/wayandn/Grid_data/"
 datadir=$maindir"maurer12k/"
-BASIN="Low"
+BASIN=$1
 
 #Lat lon indices (zero based)
 #Ilat=113
 #Ilon=34
 
-#FL=$datadir"/MAU*"
-FL=$datadir"MAURER12K_Forcing.1992-10.nc"
+FL=$datadir"/MAU*"
+#FL=$datadir"MAURER12K_Forcing.1992-10.nc"
 I_lat_lon_list=$maindir"Basin_pts/"$BASIN"/"$BASIN".txt"
 #echo $I_lat_lon_list
-echo $FL
+#echo $FL
 
 # Clear all temp and output files
 while read FN Ilat Ilon cLat cLon tlat tlon
 do
-	ls
         outpdir=$maindir"Basin_pts/"$BASIN"/"$FN"/"
-        rm $outpdir -v time ppt temp q press sw lw wnd
+        mkdir -p $outpdir
+	cd $outpdir 
+	rm -f time ppt temp q press sw lw wnd
         #rm -rv TEMP
         #rm -rv OUT
-	ls
 done < $I_lat_lon_list
 echo Done Clearing up previous files
 
@@ -59,13 +59,13 @@ do
 		ncks -s '%13.3f\n' -C -H -d lat,$Ilat,$Ilat -d lon,$Ilon,$Ilon -v wnd $cf > $tempdir"wnd"
 
 		cat $tempdir"time" >> $outpdir"time"
-		head -n -1 $tempdir"ppt" >> $outpdir"ppt"
-		head -n -1 $tempdir"temp" >> $outpdir"temp"
-		head -n -1 $tempdir"q" >> $outpdir"q"
-		head -n -1 $tempdir"press" >> $outpdir"press"
-		head -n -1 $tempdir"sw" >> $outpdir"sw"
-		head -n -1 $tempdir"lw" >> $outpdir"lw"
-		head -n -1 $tempdir"wnd" >> $outpdir"wnd"
+		head -n -2 $tempdir"ppt" >> $outpdir"ppt"
+		head -n -2 $tempdir"temp" >> $outpdir"temp"
+		head -n -2 $tempdir"q" >> $outpdir"q"
+		head -n -2 $tempdir"press" >> $outpdir"press"
+		head -n -2 $tempdir"sw" >> $outpdir"sw"
+		head -n -2 $tempdir"lw" >> $outpdir"lw"
+		head -n -2 $tempdir"wnd" >> $outpdir"wnd"
 
 	done < $I_lat_lon_list
 done
